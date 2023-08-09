@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ff49893-759b-4f82-ab30-4c96ef4b972d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="0ff49893-759b-4f82-ab30-4c96ef4b972d" name="Changes" comment="Update .gitignore to ignore config.properties">
       <change afterPath="$PROJECT_DIR$/src/config.properties.example" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/App.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/test/PruebaConexion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/chisrra/AppTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,8 +99,23 @@
       <option name="presentableId" value="Default" />
       <updated>1691466695014</updated>
       <workItem from="1691466696965" duration="4216000" />
-      <workItem from="1691538750562" duration="731000" />
+      <workItem from="1691538750562" duration="1095000" />
     </task>
+    <task id="LOCAL-00001" summary="Project created">
+      <created>1691539761573</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1691539761573</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update .gitignore to ignore config.properties">
+      <created>1691539815404</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1691539815404</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,5 +131,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Project created" />
+    <MESSAGE value="Update .gitignore to ignore config.properties" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update .gitignore to ignore config.properties" />
   </component>
 </project>
