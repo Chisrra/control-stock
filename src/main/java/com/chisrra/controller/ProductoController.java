@@ -12,7 +12,7 @@ import java.util.Map;
 public class ProductoController {
 
 	public int modificar(String nombre, String descripcion, Integer cantidad, Integer id) {
-		try(Connection connection = DatabaseConnector.createConnection()) {
+		try(Connection connection = DatabaseConnector.getConnection()) {
 			String updateQuery = "UPDATE producto SET nombre = ?, descripcion = ? , cantidad = ? WHERE id = ?;";
 
 			try(PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
@@ -29,13 +29,11 @@ public class ProductoController {
 
 		} catch (SQLException e) {
 			throw new RuntimeException("Error al intentar modificar a la base de datos: " + e.getMessage(), e);
-		} catch (IOException e) {
-			throw new RuntimeException("Error al cargar el archivo de propiedades: " +  e.getMessage(), e);
 		}
 	}
 
 	public int eliminar(Integer id) {
-		try(Connection connection = DatabaseConnector.createConnection()) {
+		try(Connection connection = DatabaseConnector.getConnection()) {
 			String deleteQuery = "DELETE FROM producto WHERE id = ?";
 
 			try(PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
@@ -46,8 +44,6 @@ public class ProductoController {
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Error al intentar eliminar el producto de la base de datos: " + e.getMessage(), e);
-		} catch (IOException e) {
-			throw new RuntimeException("Error al cargar el archivo de propiedades: " + e.getMessage(), e);
 		}
 
 	}
@@ -55,7 +51,7 @@ public class ProductoController {
 	public List<Map<String, String>> listar() {
 		List<Map<String, String>> consulta = new ArrayList<>();
 
-		try (Connection connection = DatabaseConnector.createConnection()) {
+		try (Connection connection = DatabaseConnector.getConnection()) {
 			String query = "SELECT id, nombre, descripcion, cantidad FROM producto";
 
 			try(Statement statement = connection.createStatement()) {
@@ -75,15 +71,13 @@ public class ProductoController {
 
 		} catch (SQLException e) {
 			System.err.println("Error al conectarse a la base de datos: " + e.getMessage());
-		} catch (IOException e) {
-			System.err.println("Error al cargar el archivo de propiedades: " + e.getMessage());
 		}
 
 		return consulta;
 	}
 
     public void guardar(HashMap<String, String> producto) {
-		try(Connection connection = DatabaseConnector.createConnection()) {
+		try(Connection connection = DatabaseConnector.getConnection()) {
 			connection.setAutoCommit(false);
 
 			String nombre = producto.get("NOMBRE");
@@ -105,8 +99,6 @@ public class ProductoController {
 
 		} catch (SQLException e) {
 			throw new RuntimeException("Error al crear la conexión: " + e.getMessage(), e);
-		} catch (IOException e) {
-			throw new RuntimeException("Error al cargar el archivo de propiedades: " + e.getMessage(), e);
 		}
 	}
 
@@ -123,7 +115,7 @@ public class ProductoController {
 			if(rowsAffected > 0) {
 				try(ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
 					while(resultSet.next()) {
-						System.out.printf("ID insertado: %d", resultSet.getInt(1));
+						System.out.printf("ID insertado: %d\n", resultSet.getInt(1));
 					}
 				}
 			} else {
