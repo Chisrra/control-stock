@@ -1,4 +1,4 @@
-package com.chisrra.test;
+package com.chisrra;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -19,6 +19,9 @@ public class DatabaseConnector {
             dataSources.setJdbcUrl( properties.getProperty("db.url") );
             dataSources.setUser( properties.getProperty("db.username") );
             dataSources.setPassword( properties.getProperty("db.password") );
+
+            dataSources.setMaxPoolSize(10);
+
         } catch (Exception e) {
             throw new RuntimeException("Error al configurar el pool de conexiones: " + e.getMessage(), e);
         }

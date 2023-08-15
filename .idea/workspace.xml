@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ff49893-759b-4f82-ab30-4c96ef4b972d" name="Changes" comment="Rollback implemented">
+    <list default="true" id="0ff49893-759b-4f82-ab30-4c96ef4b972d" name="Changes" comment="Connection pool implemented">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/test/PruebaPoolConexiones.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/ProductoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/test/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/test/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/test/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/DatabaseConnector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +79,7 @@
       <recent name="com.chisrra" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ControlDeStockMain">
+  <component name="RunManager" selected="Application.PruebaPoolConexiones">
     <configuration name="ControlDeStockMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.chisrra.ControlDeStockMain" />
       <module name="control-stock" />
@@ -107,8 +106,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PruebaPoolConexiones" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.chisrra.test.PruebaPoolConexiones" />
+      <module name="control-stock" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.chisrra.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.PruebaPoolConexiones" />
         <item itemvalue="Application.ControlDeStockMain" />
         <item itemvalue="Application.PruebaConexion" />
       </list>
@@ -127,7 +140,7 @@
       <workItem from="1691676729493" duration="4211000" />
       <workItem from="1691951513551" duration="8300000" />
       <workItem from="1692033631097" duration="1873000" />
-      <workItem from="1692129100179" duration="6706000" />
+      <workItem from="1692129100179" duration="7586000" />
     </task>
     <task id="LOCAL-00001" summary="Project created">
       <created>1691539761573</created>
@@ -171,7 +184,21 @@
       <option name="project" value="LOCAL" />
       <updated>1692135098715</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Connection pool implemented">
+      <created>1692137402722</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1692137402722</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Connection pool implemented">
+      <created>1692138097183</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1692138097183</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,6 +222,7 @@
     <MESSAGE value="Done the first connection" />
     <MESSAGE value="Update method implemented" />
     <MESSAGE value="Rollback implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rollback implemented" />
+    <MESSAGE value="Connection pool implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Connection pool implemented" />
   </component>
 </project>
