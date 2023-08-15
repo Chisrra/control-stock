@@ -56,7 +56,6 @@ public class ProductoController {
 		List<Map<String, String>> consulta = new ArrayList<>();
 
 		try (Connection connection = DatabaseConnector.createConnection()) {
-			System.out.println("Conexión exitosa");
 			String query = "SELECT id, nombre, descripcion, cantidad FROM producto";
 
 			try(Statement statement = connection.createStatement()) {
@@ -85,29 +84,51 @@ public class ProductoController {
 
     public void guardar(HashMap<String, String> producto) {
 		try(Connection connection = DatabaseConnector.createConnection()) {
-			String insertQuery = "INSERT INTO producto (nombre, descripcion, cantidad) VALUES (?, ?, ?)";
+			connection.setAutoCommit(false);
 
-			try(PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
-				preparedStatement.setString(1, producto.get("NOMBRE"));
-				preparedStatement.setString(2, producto.get("DESCRIPCION"));
-				preparedStatement.setString(3, producto.get("CANTIDAD"));
+			String nombre = producto.get("NOMBRE");
+			String descripcion = producto.get("DESCRIPCION");
+			int cantidad = Integer.valueOf(producto.get("CANTIDAD"));
+			int cantidadMax = 50;
 
-				int rowsAffected = preparedStatement.executeUpdate();
-				if(rowsAffected > 0) {
-					try(ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
-						while(resultSet.next()) {
-							System.out.printf("ID insertado: %d", resultSet.getInt(1));
-						}
-					}
-				} else {
-					System.err.println("No se pudo insertar el procuto");
-				}
+			try {
+				do {
+					registratProducto( connection, nombre, descripcion, Math.min(cantidadMax, cantidad) );
+					cantidad -= cantidadMax;
+				}while(cantidad > 0);
+			} catch (SQLException e) {
+				connection.rollback();
+				throw new RuntimeException("Error al guardar el producto en la base de datos: " + e.getMessage(), e);
 			}
 
+			connection.commit();
+
 		} catch (SQLException e) {
-			throw new RuntimeException("Error al guardar el producto en la base de datos: " + e.getMessage(), e);
+			throw new RuntimeException("Error al crear la conexión: " + e.getMessage(), e);
 		} catch (IOException e) {
 			throw new RuntimeException("Error al cargar el archivo de propiedades: " + e.getMessage(), e);
+		}
+	}
+
+	private static void registratProducto(Connection connection, String nombre, String descripcion, int cantidad) throws SQLException {
+		String insertQuery = "INSERT INTO producto (nombre, descripcion, cantidad) VALUES (?, ?, ?)";
+
+		try(PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
+
+			preparedStatement.setString(1, nombre);
+			preparedStatement.setString(2, descripcion);
+			preparedStatement.setInt(3, cantidad);
+
+			int rowsAffected = preparedStatement.executeUpdate();
+			if(rowsAffected > 0) {
+				try(ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
+					while(resultSet.next()) {
+						System.out.printf("ID insertado: %d", resultSet.getInt(1));
+					}
+				}
+			} else {
+				System.err.println("No se pudo insertar el procuto");
+			}
 		}
 	}
 
