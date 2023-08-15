@@ -11,8 +11,27 @@ import java.util.Map;
 
 public class ProductoController {
 
-	public void modificar(String nombre, String descripcion, Integer id) {
-		// TODO
+	public int modificar(String nombre, String descripcion, Integer cantidad, Integer id) {
+		try(Connection connection = DatabaseConnector.createConnection()) {
+			String updateQuery = "UPDATE producto SET nombre = ?, descripcion = ? , cantidad = ? WHERE id = ?;";
+
+			try(PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+				preparedStatement.setString(1, nombre);
+				preparedStatement.setString(2, descripcion);
+				preparedStatement.setInt(3, cantidad);
+				preparedStatement.setInt(4, id);
+
+				int rowsAffected = preparedStatement.executeUpdate();
+
+				return rowsAffected;
+
+			}
+
+		} catch (SQLException e) {
+			throw new RuntimeException("Error al intentar modificar a la base de datos: " + e.getMessage(), e);
+		} catch (IOException e) {
+			throw new RuntimeException("Error al cargar el archivo de propiedades: " +  e.getMessage(), e);
+		}
 	}
 
 	public int eliminar(Integer id) {

@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ff49893-759b-4f82-ab30-4c96ef4b972d" name="Changes" comment="Done the first connection">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/ControlDeStockMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/CategoriaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/ProductoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/test/DatabaseConnector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/test/PruebaConexion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/view/ControlDeStockFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/view/ReporteFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/ProductoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/view/ControlDeStockFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/view/ControlDeStockFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +124,9 @@
       <workItem from="1691466696965" duration="4216000" />
       <workItem from="1691538750562" duration="4748000" />
       <workItem from="1691676729493" duration="4211000" />
-      <workItem from="1691951513551" duration="7725000" />
+      <workItem from="1691951513551" duration="8300000" />
+      <workItem from="1692033631097" duration="1873000" />
+      <workItem from="1692129100179" duration="4129000" />
     </task>
     <task id="LOCAL-00001" summary="Project created">
       <created>1691539761573</created>

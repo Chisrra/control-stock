@@ -183,11 +183,16 @@ public class ControlDeStockFrame extends JFrame {
 
         Optional.ofNullable(modelo.getValueAt(tabla.getSelectedRow(), tabla.getSelectedColumn()))
                 .ifPresentOrElse(fila -> {
-                    Integer id = (Integer) modelo.getValueAt(tabla.getSelectedRow(), 0);
+                    Integer id = Integer.valueOf(modelo.getValueAt(tabla.getSelectedRow(), 0).toString());
                     String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), 1);
                     String descripcion = (String) modelo.getValueAt(tabla.getSelectedRow(), 2);
+                    Integer cantidad = Integer.valueOf((String) modelo.getValueAt(tabla.getSelectedRow(), 3));
 
-                    this.productoController.modificar(nombre, descripcion, id);
+                    this.productoController.modificar(nombre, descripcion, cantidad, id);
+
+                    JOptionPane.showMessageDialog(null, "Se actualizó el registro", "Actualización Exitosa",
+                            JOptionPane.INFORMATION_MESSAGE);
+
                 }, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
     }
 
@@ -235,7 +240,6 @@ public class ControlDeStockFrame extends JFrame {
             return;
         }
 
-        // TODO
         var producto = new HashMap<String, String>();
         producto.put("NOMBRE", textoNombre.getText());
         producto.put("DESCRIPCION", textoDescripcion.getText());
