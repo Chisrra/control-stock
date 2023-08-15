@@ -1,8 +1,7 @@
 package com.chisrra.controller;
 
-import com.chisrra.test.DatabaseConnector;
+import com.chisrra.DatabaseConnector;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
