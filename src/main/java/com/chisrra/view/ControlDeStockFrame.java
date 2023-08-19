@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import com.chisrra.Producto;
 import com.chisrra.controller.CategoriaController;
 import com.chisrra.controller.ProductoController;
 
@@ -188,7 +189,7 @@ public class ControlDeStockFrame extends JFrame {
                     String descripcion = (String) modelo.getValueAt(tabla.getSelectedRow(), 2);
                     Integer cantidad = Integer.valueOf((String) modelo.getValueAt(tabla.getSelectedRow(), 3));
 
-                    this.productoController.modificar(nombre, descripcion, cantidad, id);
+                    this.productoController.modificar(new Producto(id, nombre, descripcion, cantidad));
 
                     JOptionPane.showMessageDialog(null, "Se actualizó el registro", "Actualización Exitosa",
                             JOptionPane.INFORMATION_MESSAGE);
@@ -240,13 +241,9 @@ public class ControlDeStockFrame extends JFrame {
             return;
         }
 
-        var producto = new HashMap<String, String>();
-        producto.put("NOMBRE", textoNombre.getText());
-        producto.put("DESCRIPCION", textoDescripcion.getText());
-        producto.put("CANTIDAD", String.valueOf(cantidadInt));
         var categoria = comboCategoria.getSelectedItem();
 
-        this.productoController.guardar(producto);
+        this.productoController.guardar(new Producto(textoNombre.getText(), textoDescripcion.getText(), cantidadInt));
 
         JOptionPane.showMessageDialog(this, "Registrado con éxito!");
 

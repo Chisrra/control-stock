@@ -1,6 +1,7 @@
 package com.chisrra.controller;
 
-import com.chisrra.DatabaseConnector;
+import com.chisrra.db.DatabaseConnector;
+import com.chisrra.Producto;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,15 +11,15 @@ import java.util.Map;
 
 public class ProductoController {
 
-	public int modificar(String nombre, String descripcion, Integer cantidad, Integer id) {
+	public int modificar(Producto producto) {
 		try(Connection connection = DatabaseConnector.getConnection()) {
 			String updateQuery = "UPDATE producto SET nombre = ?, descripcion = ? , cantidad = ? WHERE id = ?;";
 
 			try(PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-				preparedStatement.setString(1, nombre);
-				preparedStatement.setString(2, descripcion);
-				preparedStatement.setInt(3, cantidad);
-				preparedStatement.setInt(4, id);
+				preparedStatement.setString(1, producto.getNombre());
+				preparedStatement.setString(2, producto.getDescripcion());
+				preparedStatement.setInt(3, producto.getCantidad());
+				preparedStatement.setInt(4, producto.getId());
 
 				int rowsAffected = preparedStatement.executeUpdate();
 
@@ -75,20 +76,16 @@ public class ProductoController {
 		return consulta;
 	}
 
-    public void guardar(HashMap<String, String> producto) {
+    public void guardar(Producto producto) {
 		try(Connection connection = DatabaseConnector.getConnection()) {
 			connection.setAutoCommit(false);
 
-			String nombre = producto.get("NOMBRE");
-			String descripcion = producto.get("DESCRIPCION");
-			int cantidad = Integer.valueOf(producto.get("CANTIDAD"));
+
+			int cantidad = producto.getCantidad();
 			int cantidadMax = 50;
 
 			try {
-				do {
-					registratProducto( connection, nombre, descripcion, Math.min(cantidadMax, cantidad) );
-					cantidad -= cantidadMax;
-				}while(cantidad > 0);
+				registratProducto( connection, producto);
 			} catch (SQLException e) {
 				connection.rollback();
 				throw new RuntimeException("Error al guardar el producto en la base de datos: " + e.getMessage(), e);
@@ -101,20 +98,21 @@ public class ProductoController {
 		}
 	}
 
-	private static void registratProducto(Connection connection, String nombre, String descripcion, int cantidad) throws SQLException {
+	private static void registratProducto(Connection connection, Producto producto) throws SQLException {
 		String insertQuery = "INSERT INTO producto (nombre, descripcion, cantidad) VALUES (?, ?, ?)";
 
 		try(PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
 
-			preparedStatement.setString(1, nombre);
-			preparedStatement.setString(2, descripcion);
-			preparedStatement.setInt(3, cantidad);
+			preparedStatement.setString(1, producto.getNombre());
+			preparedStatement.setString(2, producto.getDescripcion());
+			preparedStatement.setInt(3, producto.getCantidad());
 
 			int rowsAffected = preparedStatement.executeUpdate();
 			if(rowsAffected > 0) {
 				try(ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
 					while(resultSet.next()) {
-						System.out.printf("ID insertado: %d\n", resultSet.getInt(1));
+						producto.setId(resultSet.getInt(1));
+						System.out.println("Se agrego el producto:" + producto);
 					}
 				}
 			} else {
