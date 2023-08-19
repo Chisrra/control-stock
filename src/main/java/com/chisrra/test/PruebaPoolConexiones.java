@@ -1,6 +1,6 @@
 package com.chisrra.test;
 
-import com.chisrra.DatabaseConnector;
+import com.chisrra.db.DatabaseConnector;
 
 import java.sql.Connection;
 import java.sql.SQLException;

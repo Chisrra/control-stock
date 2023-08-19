@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ff49893-759b-4f82-ab30-4c96ef4b972d" name="Changes" comment="Connection pool implemented">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/test/PruebaPoolConexiones.java" afterDir="false" />
+    <list default="true" id="0ff49893-759b-4f82-ab30-4c96ef4b972d" name="Changes" comment="Created Producto object&#10;Its propose is store the data of a Producto">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/test/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/db/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/ProductoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/db/ProductoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/db/ProductoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/test/PruebaPoolConexiones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/test/PruebaPoolConexiones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/view/ControlDeStockFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/view/ControlDeStockFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,13 +82,13 @@
       <recent name="com.chisrra" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PruebaPoolConexiones">
+  <component name="RunManager" selected="Application.ControlDeStockMain">
     <configuration name="ControlDeStockMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.chisrra.ControlDeStockMain" />
       <module name="control-stock" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.chisrra.*" />
+          <option name="PATTERN" value="com.chisrra.db.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -121,8 +124,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.PruebaPoolConexiones" />
         <item itemvalue="Application.ControlDeStockMain" />
+        <item itemvalue="Application.PruebaPoolConexiones" />
         <item itemvalue="Application.PruebaConexion" />
       </list>
     </recent_temporary>
@@ -140,7 +143,8 @@
       <workItem from="1691676729493" duration="4211000" />
       <workItem from="1691951513551" duration="8300000" />
       <workItem from="1692033631097" duration="1873000" />
-      <workItem from="1692129100179" duration="7586000" />
+      <workItem from="1692129100179" duration="8216000" />
+      <workItem from="1692416568909" duration="6555000" />
     </task>
     <task id="LOCAL-00001" summary="Project created">
       <created>1691539761573</created>
@@ -198,7 +202,21 @@
       <option name="project" value="LOCAL" />
       <updated>1692138097183</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Tested Max Pool Size">
+      <created>1692138131656</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1692138131656</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Created Producto object&#10;Its propose is store the data of a Producto">
+      <created>1692419650190</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1692419650190</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +241,8 @@
     <MESSAGE value="Update method implemented" />
     <MESSAGE value="Rollback implemented" />
     <MESSAGE value="Connection pool implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Connection pool implemented" />
+    <MESSAGE value="Tested Max Pool Size" />
+    <MESSAGE value="Created Producto object&#10;Its propose is store the data of a Producto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Producto object&#10;Its propose is store the data of a Producto" />
   </component>
 </project>
