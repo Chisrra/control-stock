@@ -4,12 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ff49893-759b-4f82-ab30-4c96ef4b972d" name="Changes" comment="Created and implemented ProductoDAO&#10;Implemented MVC">
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+    <list default="true" id="0ff49893-759b-4f82-ab30-4c96ef4b972d" name="Changes" comment="Implemented INNER JOIN&#10;Solved the problem of &quot;N + 1&quot; queries">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/ControlDeStockMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/ControlDeStockMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/CategoriaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/CategoriaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/controller/ProductoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/db/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/db/Categoria.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/db/DAO/CategoriaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/db/DAO/CategoriaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/db/DAO/ProductoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/db/DAO/ProductoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/db/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/db/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/db/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/db/Producto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/view/ControlDeStockFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/view/ControlDeStockFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chisrra/view/ReporteFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chisrra/view/ReporteFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,25 +57,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/crist/OneDrive/Documentos/Oracle/ONE/Java y JDBC/control-stock/src/main/java&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/crist/OneDrive/Documentos/Oracle/ONE/Java y JDBC/control-stock/src/main/java",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.fileTypes",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\crist\OneDrive\Documentos\Oracle\ONE\Java y JDBC\control-stock\src\main\java" />
@@ -147,7 +156,8 @@
       <workItem from="1692129100179" duration="8216000" />
       <workItem from="1692416568909" duration="6605000" />
       <workItem from="1692560757589" duration="5476000" />
-      <workItem from="1692590142695" duration="4179000" />
+      <workItem from="1692590142695" duration="4215000" />
+      <workItem from="1692623763001" duration="2953000" />
     </task>
     <task id="LOCAL-00001" summary="Project created">
       <created>1691539761573</created>
@@ -226,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692423294220</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Implemented INNER JOIN&#10;Solved the problem of &quot;N + 1&quot; queries">
+      <created>1692594360308</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1692594360308</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,17 +271,7 @@
     <MESSAGE value="Tested Max Pool Size" />
     <MESSAGE value="Created Producto object&#10;Its propose is store the data of a Producto" />
     <MESSAGE value="Created and implemented ProductoDAO&#10;Implemented MVC" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created and implemented ProductoDAO&#10;Implemented MVC" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/chisrra/view/ControlDeStockFrame.java</url>
-          <line>249</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Implemented INNER JOIN&#10;Solved the problem of &quot;N + 1&quot; queries" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented INNER JOIN&#10;Solved the problem of &quot;N + 1&quot; queries" />
   </component>
 </project>

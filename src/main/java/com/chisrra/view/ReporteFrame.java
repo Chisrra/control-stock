@@ -9,6 +9,9 @@ import javax.swing.table.DefaultTableModel;
 import com.chisrra.controller.CategoriaController;
 import com.chisrra.controller.ProductoController;
 
+/**
+ * Clase que representa la ventana de reporte de productos del stock.
+ */
 public class ReporteFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -19,6 +22,11 @@ public class ReporteFrame extends JFrame {
     private CategoriaController categoriaController;
     private ProductoController productoController;
 
+    /**
+     * Constructor de la clase ReporteFrame.
+     * Crea una nueva ventana de reporte de productos del stock.
+     * @param controlDeStockFrame La ventana de ControlDeStockFrame desde la cual se abre el reporte.
+     */
     public ReporteFrame(ControlDeStockFrame controlDeStockFrame) {
         super("Reporte de produtos del stock");
 
@@ -45,6 +53,11 @@ public class ReporteFrame extends JFrame {
         setLocationRelativeTo(controlDeStockFrame);
     }
 
+    /**
+     * Carga y muestra el reporte en la tabla.
+     * Obtiene la información del reporte desde el controlador de categorías.
+     * Llena la tabla con las categorías y sus productos correspondientes.
+     */
     private void cargaReporte() {
         var contenido = categoriaController.cargaReporte();
 

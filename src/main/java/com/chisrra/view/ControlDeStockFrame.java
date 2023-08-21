@@ -21,8 +21,12 @@ import com.chisrra.db.Producto;
 import com.chisrra.controller.CategoriaController;
 import com.chisrra.controller.ProductoController;
 
+/**
+ * Vista inicial de la aplicación que permite ver, registrar, eliminar y editar productos
+ */
 public class ControlDeStockFrame extends JFrame {
 
+    // Componentes de la GUI
     private static final long serialVersionUID = 1L;
 
     private JLabel labelNombre, labelDescripcion, labelCantidad, labelCategoria;
@@ -31,9 +35,14 @@ public class ControlDeStockFrame extends JFrame {
     private JButton botonGuardar, botonModificar, botonLimpiar, botonEliminar, botonReporte;
     private JTable tabla;
     private DefaultTableModel modelo;
+
+    // Declaración de los controladores
     private ProductoController productoController;
     private CategoriaController categoriaController;
 
+    /**
+     * Constructor de la clase ControlDeStockFrame
+     */
     public ControlDeStockFrame() {
         super("Productos");
 
@@ -50,6 +59,9 @@ public class ControlDeStockFrame extends JFrame {
         configurarAccionesDelFormulario();
     }
 
+    /**
+     * Método para configurar la tabla de contenido en el contenedor
+     */
     private void configurarTablaDeContenido(Container container) {
         tabla = new JTable();
 
@@ -80,6 +92,9 @@ public class ControlDeStockFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Método para configurar los campos del formulario en el contenedor
+     */
     private void configurarCamposDelFormulario(Container container) {
         labelNombre = new JLabel("Nombre del Producto");
         labelDescripcion = new JLabel("Descripción del Producto");
@@ -126,6 +141,9 @@ public class ControlDeStockFrame extends JFrame {
         container.add(botonLimpiar);
     }
 
+    /**
+     * Método para configurar las acciones de los botones del formulario
+     */
     private void configurarAccionesDelFormulario() {
         botonGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -164,18 +182,34 @@ public class ControlDeStockFrame extends JFrame {
         });
     }
 
+    /**
+     * Abre la ventana de reporte para visualizar los productos.
+     */
     private void abrirReporte() {
         new ReporteFrame(this);
     }
 
+    /**
+     * Limpia el contenido de la tabla de la GUI.
+     */
     private void limpiarTabla() {
         modelo.getDataVector().clear();
     }
 
+    /**
+     * Verifica si se ha seleccionado una fila en la tabla.
+     * @return true si se ha seleccionado una fila, false si no.
+     */
     private boolean tieneFilaElegida() {
         return tabla.getSelectedRowCount() == 0 || tabla.getSelectedColumnCount() == 0;
     }
 
+    /**
+     * Modifica un producto seleccionado en la tabla.
+     * Si no se ha seleccionado una fila, muestra un mensaje de error.
+     * Si la fila está seleccionada, obtiene los valores y los utiliza para
+     * actualizar el producto correspondiente en la base de datos.
+     */
     private void modificar() {
         if (tieneFilaElegida()) {
             JOptionPane.showMessageDialog(this, "Por favor, elije un item");
@@ -197,6 +231,12 @@ public class ControlDeStockFrame extends JFrame {
                 }, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
     }
 
+    /**
+     * Elimina un producto seleccionado en la tabla.
+     * Si no se ha seleccionado una fila, muestra un mensaje de error.
+     * Si la fila está seleccionada, obtiene el ID del producto y lo utiliza
+     * para eliminar el producto correspondiente de la base de datos.
+     */
     private void eliminar() {
         if (tieneFilaElegida()) {
             JOptionPane.showMessageDialog(this, "Por favor, elije un item");
@@ -215,6 +255,9 @@ public class ControlDeStockFrame extends JFrame {
                 }, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
     }
 
+    /**
+     * Carga los productos desde la base de datos y los muestra en la tabla.
+     */
     private void cargarTabla() {
         var productos = this.productoController.listar();
 
@@ -229,6 +272,10 @@ public class ControlDeStockFrame extends JFrame {
 
     }
 
+    /**
+     * Guarda un nuevo producto en la base de datos con los valores ingresados en los campos de texto.
+     * Realiza validaciones de campos requeridos y numéricos.
+     */
     private void guardar() {
         if (textoNombre.getText().isBlank() || textoDescripcion.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "Los campos Nombre y Descripción son requeridos.");
@@ -254,6 +301,9 @@ public class ControlDeStockFrame extends JFrame {
         this.limpiarFormulario();
     }
 
+    /**
+     * Limpia el formulario, reseteando los campos de texto y combo box.
+     */
     private void limpiarFormulario() {
         this.textoNombre.setText("");
         this.textoDescripcion.setText("");
