@@ -1,6 +1,7 @@
-package com.chisrra.db;
+package com.chisrra.db.DAO;
 
-import com.chisrra.Producto;
+import com.chisrra.db.Producto;
+import com.chisrra.db.DatabaseConnector;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,13 +28,14 @@ public interface ProductoDAO {
     }
 
     private static void registratProducto(Connection connection, Producto producto) throws SQLException {
-        String insertQuery = "INSERT INTO producto (nombre, descripcion, cantidad) VALUES (?, ?, ?)";
+        String insertQuery = "INSERT INTO producto (nombre, descripcion, cantidad, fk_categoria_id) VALUES (?, ?, ?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, producto.getNombre());
             preparedStatement.setString(2, producto.getDescripcion());
             preparedStatement.setInt(3, producto.getCantidad());
+            preparedStatement.setInt(4, producto.getFk_categoria().getId());
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
@@ -75,11 +77,39 @@ public interface ProductoDAO {
         return consulta;
     }
 
+    static List<Producto> listar(int id) {
+        List<Producto> consulta = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String query = "SELECT id, nombre, descripcion, cantidad FROM producto WHERE fk_categoria_id = ?";
+            System.out.println(query);
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, id);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while ( resultSet.next() ) {
+                    Producto producto = new Producto(
+                            resultSet.getInt("id"),
+                            resultSet.getString("nombre"),
+                            resultSet.getString("descripcion"),
+                            resultSet.getInt("cantidad"));
+                    consulta.add(producto);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al conectarse a la base de datos: " + e.getMessage());
+        }
+
+        return consulta;
+    }
+
     static int eliminar(int id) {
-        try(Connection connection = DatabaseConnector.getConnection()) {
+        try (Connection connection = DatabaseConnector.getConnection()) {
             String deleteQuery = "DELETE FROM producto WHERE id = ?";
 
-            try(PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
                 preparedStatement.setInt(1, id);
 
                 int rowsAffected = preparedStatement.executeUpdate();
@@ -91,10 +121,10 @@ public interface ProductoDAO {
     }
 
     static int modificar(Producto producto) {
-        try(Connection connection = DatabaseConnector.getConnection()) {
+        try (Connection connection = DatabaseConnector.getConnection()) {
             String updateQuery = "UPDATE producto SET nombre = ?, descripcion = ? , cantidad = ? WHERE id = ?;";
 
-            try(PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
                 preparedStatement.setString(1, producto.getNombre());
                 preparedStatement.setString(2, producto.getDescripcion());
                 preparedStatement.setInt(3, producto.getCantidad());
@@ -110,4 +140,6 @@ public interface ProductoDAO {
             throw new RuntimeException("Error al intentar modificar a la base de datos: " + e.getMessage(), e);
         }
     }
+
+
 }

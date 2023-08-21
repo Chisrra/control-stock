@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 import javax.swing.JButton;
@@ -16,7 +16,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import com.chisrra.Producto;
+import com.chisrra.db.Categoria;
+import com.chisrra.db.Producto;
 import com.chisrra.controller.CategoriaController;
 import com.chisrra.controller.ProductoController;
 
@@ -100,9 +101,8 @@ public class ControlDeStockFrame extends JFrame {
         comboCategoria = new JComboBox<>();
         comboCategoria.addItem("Elige una Categoría");
 
-        // TODO
-        var categorias = this.categoriaController.listar();
-        // categorias.forEach(categoria -> comboCategoria.addItem(categoria));
+        List<Categoria> categorias = this.categoriaController.listar();
+        categorias.forEach(categoria -> comboCategoria.addItem(categoria));
 
         textoNombre.setBounds(10, 25, 265, 20);
         textoDescripcion.setBounds(10, 65, 265, 20);
@@ -245,9 +245,9 @@ public class ControlDeStockFrame extends JFrame {
             return;
         }
 
-        var categoria = comboCategoria.getSelectedItem();
+        Categoria categoria = (Categoria) comboCategoria.getSelectedItem();
 
-        this.productoController.guardar(new Producto(textoNombre.getText(), textoDescripcion.getText(), cantidadInt));
+        this.productoController.guardar(new Producto(textoNombre.getText(), textoDescripcion.getText(), cantidadInt, categoria));
 
         JOptionPane.showMessageDialog(this, "Registrado con éxito!");
 

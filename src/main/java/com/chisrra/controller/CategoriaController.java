@@ -1,18 +1,19 @@
 package com.chisrra.controller;
 
+import com.chisrra.db.Categoria;
+import com.chisrra.db.DAO.CategoriaDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriaController {
 
-	public List<?> listar() {
-		// TODO
-		return new ArrayList<>();
+	public List<Categoria> listar() {
+        return CategoriaDAO.listar();
 	}
 
-    public List<?> cargaReporte() {
-        // TODO
-        return new ArrayList<>();
+    public List<Categoria> cargaReporte() {
+        return CategoriaDAO.listar();
     }
 
 }

@@ -1,11 +1,13 @@
-package com.chisrra;
+package com.chisrra.db;
 
 public class Producto {
     private int id;
-    private final String nombre;
-    private final String descripcion;
-    private final int cantidad;
+    private String nombre;
+    private String descripcion;
+    private int cantidad;
+    private Categoria fk_categoria;
 
+    //temp
     public Producto(int id, String nombre, String descripcion, int cantidad) {
         this.id = id;
         this.nombre = nombre;
@@ -13,10 +15,11 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public Producto(String nombre, String descripcion, int cantidad) {
+    public Producto(String nombre, String descripcion, int cantidad, Categoria fk_categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
+        this.fk_categoria = fk_categoria;
     }
 
     public int getId() {
@@ -35,12 +38,20 @@ public class Producto {
         return cantidad;
     }
 
-    public void setId(int id) {
-       this.id = id;
+    public Categoria getFk_categoria() {
+        return fk_categoria;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setFk_categoria(Categoria fk_categoria) { this.fk_categoria = fk_categoria; }
 
     @Override
     public String toString() {
-        return String.format("{ID: %d, NOMBRE: %s, DESCRIPCION: %s, CANTIDAD: %d}", id, nombre, descripcion, cantidad);
+        return String.format("{ID: %d, NOMBRE: %s, DESCRIPCION: %s, CANTIDAD: %d, CATEGORIA: %s}", id, nombre, descripcion, cantidad, fk_categoria);
     }
+
+
 }

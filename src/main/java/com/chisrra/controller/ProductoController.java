@@ -1,14 +1,10 @@
 package com.chisrra.controller;
 
-import com.chisrra.db.DatabaseConnector;
-import com.chisrra.Producto;
-import com.chisrra.db.ProductoDAO;
+import com.chisrra.db.Categoria;
+import com.chisrra.db.Producto;
+import com.chisrra.db.DAO.ProductoDAO;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ProductoController {
 
@@ -23,6 +19,8 @@ public class ProductoController {
 	public List<Producto> listar() {
 		return ProductoDAO.listar();
 	}
+
+	public List<Producto> listar(Categoria categoria) { return ProductoDAO.listar( categoria.getId() ); }
 
     public void guardar(Producto producto) {
 		if( ProductoDAO.guardarProcuto(producto) ) System.out.println("Se agrego el producto:" + producto);
