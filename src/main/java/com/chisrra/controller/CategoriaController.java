@@ -13,7 +13,7 @@ public class CategoriaController {
 	}
 
     public List<Categoria> cargaReporte() {
-        return CategoriaDAO.listar();
+        return CategoriaDAO.categoriaProductoView();
     }
 
 }
